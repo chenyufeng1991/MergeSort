@@ -8,8 +8,8 @@
 
 #include <stdio.h>
 
-void MergeSort(int a[],int begin,int end,int temp[]);
-void MergeArray(int a[],int begin,int mid,int end,int temp[]);
+void MergeSort(int *a,int begin,int end,int *temp);
+void MergeArray(int *a,int begin,int mid,int end,int *temp);
 
 int main(int argc, const char * argv[]) {
 
