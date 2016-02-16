@@ -23,25 +23,26 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-//将有二个有序子数组a[begin...mid]和a[mid+1...end]合并。
-void MergeArray(int a[],int begin,int mid,int end,int temp[]){
+//将有二个有序子数组a[begin...mid]和a[mid+1...end]合并;
+void MergeArray(int *a,int begin,int mid,int end,int *temp){
 
     int i = begin,j = mid + 1;
     int m = mid,n = end;
     int k = 0;
 
+    //开始合并两个数组；
     while(i <= m && j <= n){
-
         if(a[i] <= a[j]){
             temp[k++] = a[i++];
-        }
-        else{
+        }else{
             temp[k++] = a[j++];
         }
     }
+
     while(i <= m){
         temp[k++] = a[i++];
     }
+
     while(j <= n){
         temp[k++] = a[j++];
     }
@@ -52,10 +53,13 @@ void MergeArray(int a[],int begin,int mid,int end,int temp[]){
     }
 }
 
-void MergeSort(int a[],int begin,int end,int temp[]){
+void MergeSort(int *a,int begin,int end,int *temp){
     if(begin < end){
 
         int mid = (begin + end) / 2;
+        /**
+         *  分别递归进行排序，也称为2-路归并；
+         */
         MergeSort(a,begin,mid,temp);   //左边有序
         MergeSort(a,mid + 1,end,temp);   //右边有序
         MergeArray(a,begin,mid,end,temp); //将左右两边有序的数组合并
