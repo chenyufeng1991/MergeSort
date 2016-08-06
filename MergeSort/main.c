@@ -11,50 +11,59 @@
 void MergeSort(int *a,int begin,int end,int *temp);
 void MergeArray(int *a,int begin,int mid,int end,int *temp);
 
-int main(int argc, const char * argv[]) {
-
+int main(int argc, const char * argv[])
+{
     int num[] = {2,5,9,3,6,1,0,7,4,8};
-    int temp[10];
+    int temp[10]; // 注意：归并排序需要大小为n的辅助空间，所以空间复杂度为O(n)
     MergeSort(num,0,9,temp);
-    for(int i = 0;i < 10;i++){
+    for(int i = 0;i < 10;i++)
+    {
         printf("%d ",num[i]);
     }
-    printf("\n");
     return 0;
 }
 
-//将有二个有序子数组a[begin...mid]和a[mid+1...end]合并;
-void MergeArray(int *a,int begin,int mid,int end,int *temp){
-
-    int i = begin,j = mid + 1;
-    int m = mid,n = end;
+//将二个有序子数组a[begin...mid]和a[mid+1...end]合并;
+void MergeArray(int *a,int begin,int mid,int end,int *temp)
+{
+    int i = begin,j = mid;
+    int m = mid + 1,n = end;
     int k = 0;
 
     //开始合并两个数组；
-    while(i <= m && j <= n){
-        if(a[i] <= a[j]){
+    while(i <= j && m <= n)
+    {
+        if(a[i] <= a[m])
+        {
             temp[k++] = a[i++];
-        }else{
-            temp[k++] = a[j++];
+        }
+        else
+        {
+            temp[k++] = a[m++];
         }
     }
 
-    while(i <= m){
+    while(i <= j)
+    {
         temp[k++] = a[i++];
     }
 
-    while(j <= n){
-        temp[k++] = a[j++];
+    while(m <= n)
+    {
+        temp[k++] = a[m++];
     }
 
     //把temp数组中的结果装回a数组
-    for(i = 0;i < k;i++){
+    for(i = 0; i < k; i++)
+    {
         a[begin + i] = temp[i];
     }
 }
 
-void MergeSort(int *a,int begin,int end,int *temp){
-    if(begin < end){
+void MergeSort(int *a,int begin,int end,int *temp)
+{
+    if(begin < end)
+    {
 
         int mid = (begin + end) / 2;
         /**
